@@ -21,9 +21,9 @@ Options:
     --dev-tgt=<file>                        dev target file
     --vocab=<file>                          vocab file
     --seed=<int>                            seed [default: 0]
-    --batch-size=<int>                      batch size [default: 32]
-    --embed-size=<int>                      embedding size [default: 256]
-    --hidden-size=<int>                     hidden size [default: 256]
+    --batch-size=<int>                      batch size [default: 16]
+    --embed-size=<int>                      embedding size [default: 200]
+    --hidden-size=<int>                     hidden size [default: 200]
     --clip-grad=<float>                     gradient clipping [default: 5.0]
     --log-every=<int>                       log every [default: 10]
     --max-epoch=<int>                       max epoch [default: 30]
