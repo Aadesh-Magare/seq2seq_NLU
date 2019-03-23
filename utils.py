@@ -61,7 +61,10 @@ def filter_by_length(data, size):
         if len(sent1) > size or len(sent2) > size :
             deletes.append(i)
     
-    return list(np.delete(data, deletes))
+    for i in deletes[: : -1]:
+        del data[i]
+
+    return data
 
 def batch_iter(data, batch_size, shuffle=False):
     """ Yield batches of source and target sentences reverse sorted by length (largest to smallest).
