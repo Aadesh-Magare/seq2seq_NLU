@@ -216,12 +216,15 @@ def train(args: Dict):
                 plt.ylabel('Loss')
                 plt.savefig('losses_' + str(train_iter) + '.png')
                 plt.close()
+                plot_losses.clear()
                 plt.plot(list(range(0, train_iter, log_every)), plot_ppl)
                 plt.title('Training Perplexity')
                 plt.xlabel('Ierations')
                 plt.ylabel('Perplexity')
                 plt.savefig('ppl_' + str(train_iter) + '.png')
-                 
+                plt.close()
+                plot_ppl.clear()
+
                 print('begin validation ...', file=sys.stderr)
 
                 # compute dev. ppl and bleu
