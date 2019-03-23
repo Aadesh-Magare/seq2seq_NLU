@@ -230,13 +230,13 @@ class NMT(nn.Module):
             e_t = e_t / np.sqrt(self.hidden_size)
 
         elif self.att_type == 'additive':
-            W_1 = nn.Linear(self.hidden_size, self.hidden_size, bias=False) 
-            W_2 = nn.Linear(self.hidden_size, self.hidden_size, bias=False)
-            V = nn.Linear(self.hidden_size, 1, bias=False)
+            W_1 = nn.Linear(self.hidden_size, self.hidden_size, bias=False).to(self.device) 
+            W_2 = nn.Linear(self.hidden_size, self.hidden_size, bias=False).to(self.device)
+            V = nn.Linear(self.hidden_size, 1, bias=False).to(self.device)
             e_t = V(F.relu(W_1(dec_hidden)).unsqueeze(1) + F.relu(W_2(enc_hiddens_proj))).squeeze(2)
 
         elif self.att_type == 'multiplicative':
-            W = nn.Linear(self.hidden_size, self.hidden_size, bias=False)
+            W = nn.Linear(self.hidden_size, self.hidden_size, bias=False).to(self.device)
             h_tt = F.relu((W(enc_hiddens_proj)))
             e_t = torch.bmm(dec_hidden.unsqueeze(1), h_tt.transpose(1,2)).squeeze(1)
 

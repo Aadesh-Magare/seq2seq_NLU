@@ -29,7 +29,7 @@ Options:
     --max-epoch=<int>                       max epoch [default: 10]
     --input-feed                            use input feeding
     --patience=<int>                        wait for how many iterations to decay learning rate [default: 5]
-    --max-num-trial=<int>                   terminate training after how many trials [default: 5]
+    --max-num-trial=<int>                   terminate training after how many trials [default: 1]
     --lr-decay=<float>                      learning rate decay [default: 0.5]
     --beam-size=<int>                       beam size [default: 5]
     --sample-size=<int>                     sample size [default: 5]
@@ -39,7 +39,7 @@ Options:
     --valid-niter=<int>                     perform validation after how many iterations [default: 2000]
     --dropout=<float>                       dropout [default: 0.3]
     --max-decoding-time-step=<int>          maximum number of decoding time steps [default: 70]
-    --att_type=<str>                        type of attention used additive/multiplicative/key_value [default: scaled_dot_product]
+    --att_type=<str>                        type of attention used additive/multiplicative/key_value [default: multiplicative]
 """
 import math
 import sys
