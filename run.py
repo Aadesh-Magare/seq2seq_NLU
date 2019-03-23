@@ -210,14 +210,14 @@ def train(args: Dict):
 
                 cum_loss = cum_examples = cum_tgt_words = 0.
                 valid_num += 1
-                plt.plot(list(range(0, train_iter, log_every)), plot_losses)
+                plt.plot([i * 2000 for i in range(0, len(plot_losses))], plot_losses)
                 plt.title('Training Loss')
                 plt.xlabel('Iterations')
                 plt.ylabel('Loss')
                 plt.savefig('losses_' + str(train_iter) + '.png')
                 plt.close()
                 plot_losses.clear()
-                plt.plot(list(range(0, train_iter, log_every)), plot_ppl)
+                plt.plot([i * 2000 for i in range(0, len(plot_ppl))], plot_ppl)
                 plt.title('Training Perplexity')
                 plt.xlabel('Ierations')
                 plt.ylabel('Perplexity')
