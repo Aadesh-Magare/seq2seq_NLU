@@ -51,6 +51,17 @@ def read_corpus(file_path, source):
 
     return data
 
+def filter_by_length(data, size):
+    """
+        Remove sentences of length greater than size
+    """
+    deletes = []
+    for i in range(len(data)):
+        sent1, sent2 = data[i]        
+        if len(sent1) > size or len(sent2) > size :
+            deletes.append(i)
+    
+    return list(np.delete(data, deletes))
 
 def batch_iter(data, batch_size, shuffle=False):
     """ Yield batches of source and target sentences reverse sorted by length (largest to smallest).

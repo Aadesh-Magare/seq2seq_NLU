@@ -53,7 +53,7 @@ from nmt_model import Hypothesis, NMT
 import numpy as np
 from typing import List, Tuple, Dict, Set, Union
 from tqdm import tqdm
-from utils import read_corpus, batch_iter
+from utils import read_corpus, batch_iter, filter_by_length
 from vocab import Vocab, VocabEntry
 import matplotlib.pyplot as plt
 import torch
@@ -114,7 +114,9 @@ def train(args: Dict):
     dev_data_tgt = read_corpus(args['--dev-tgt'], source='tgt')
 
     train_data = list(zip(train_data_src, train_data_tgt))
+    train_data = filter_by_length(train_data, size=20)
     dev_data = list(zip(dev_data_src, dev_data_tgt))
+    dev_data = filter_by_length(dev_data, size=20)
 
     train_batch_size = int(args['--batch-size'])
     clip_grad = float(args['--clip-grad'])
