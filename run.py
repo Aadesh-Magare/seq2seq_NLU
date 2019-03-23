@@ -21,12 +21,12 @@ Options:
     --dev-tgt=<file>                        dev target file
     --vocab=<file>                          vocab file
     --seed=<int>                            seed [default: 0]
-    --batch-size=<int>                      batch size [default: 10]
-    --embed-size=<int>                      embedding size [default: 100]
-    --hidden-size=<int>                     hidden size [default: 100]
+    --batch-size=<int>                      batch size [default: 16]
+    --embed-size=<int>                      embedding size [default: 200]
+    --hidden-size=<int>                     hidden size [default: 200]
     --clip-grad=<float>                     gradient clipping [default: 5.0]
     --log-every=<int>                       log every [default: 100]
-    --max-epoch=<int>                       max epoch [default: 10]
+    --max-epoch=<int>                       max epoch [default: 5]
     --input-feed                            use input feeding
     --patience=<int>                        wait for how many iterations to decay learning rate [default: 5]
     --max-num-trial=<int>                   terminate training after how many trials [default: 1]
