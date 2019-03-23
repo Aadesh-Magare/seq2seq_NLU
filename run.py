@@ -21,12 +21,12 @@ Options:
     --dev-tgt=<file>                        dev target file
     --vocab=<file>                          vocab file
     --seed=<int>                            seed [default: 0]
-    --batch-size=<int>                      batch size [default: 16]
-    --embed-size=<int>                      embedding size [default: 200]
-    --hidden-size=<int>                     hidden size [default: 200]
+    --batch-size=<int>                      batch size [default: 10]
+    --embed-size=<int>                      embedding size [default: 100]
+    --hidden-size=<int>                     hidden size [default: 100]
     --clip-grad=<float>                     gradient clipping [default: 5.0]
-    --log-every=<int>                       log every [default: 10]
-    --max-epoch=<int>                       max epoch [default: 30]
+    --log-every=<int>                       log every [default: 100]
+    --max-epoch=<int>                       max epoch [default: 10]
     --input-feed                            use input feeding
     --patience=<int>                        wait for how many iterations to decay learning rate [default: 5]
     --max-num-trial=<int>                   terminate training after how many trials [default: 5]
@@ -55,7 +55,7 @@ from typing import List, Tuple, Dict, Set, Union
 from tqdm import tqdm
 from utils import read_corpus, batch_iter
 from vocab import Vocab, VocabEntry
-
+import matplotlib.pyplot as plt
 import torch
 import torch.nn.utils
 
@@ -154,6 +154,8 @@ def train(args: Dict):
     train_time = begin_time = time.time()
     print('begin Maximum Likelihood training')
 
+    plot_losses = []
+    plot_ppl = []
     while True:
         epoch += 1
 
@@ -193,6 +195,8 @@ def train(args: Dict):
                                                                                          cum_examples,
                                                                                          report_tgt_words / (time.time() - train_time),
                                                                                          time.time() - begin_time), file=sys.stderr)
+                plot_losses.append(report_loss / report_examples)
+                plot_ppl.append(math.exp(report_loss / report_tgt_words))
 
                 train_time = time.time()
                 report_loss = report_tgt_words = report_examples = 0.
@@ -206,7 +210,18 @@ def train(args: Dict):
 
                 cum_loss = cum_examples = cum_tgt_words = 0.
                 valid_num += 1
-
+                plt.plot(list(range(0, train_iter, log_every)), plot_losses)
+                plt.title('Training Loss')
+                plt.xlabel('Iterations')
+                plt.ylabel('Loss')
+                plt.savefig('losses_' + str(train_iter) + '.png')
+                plt.close()
+                plt.plot(list(range(0, train_iter, log_every)), plot_ppl)
+                plt.title('Training Perplexity')
+                plt.xlabel('Ierations')
+                plt.ylabel('Perplexity')
+                plt.savefig('ppl_' + str(train_iter) + '.png')
+                 
                 print('begin validation ...', file=sys.stderr)
 
                 # compute dev. ppl and bleu
