@@ -15,6 +15,7 @@ import torch.nn as nn
 import torch.nn.utils
 import torch.nn.functional as F
 from torch.nn.utils.rnn import pad_packed_sequence, pack_padded_sequence
+import numpy as np
 
 from model_embeddings import ModelEmbeddings
 Hypothesis = namedtuple('Hypothesis', ['value', 'score'])
@@ -26,7 +27,7 @@ class NMT(nn.Module):
         - Unidirection LSTM Decoder
         - Global Attention Model (Luong, et al. 2015)
     """
-    def __init__(self, embed_size, hidden_size, vocab, dropout_rate=0.2):
+    def __init__(self, embed_size, hidden_size, vocab, dropout_rate=0.2, att_type='scaled_dot_product'):
         """ Init NMT Model.
 
         @param embed_size (int): Embedding size (dimensionality)
@@ -40,6 +41,7 @@ class NMT(nn.Module):
         self.hidden_size = hidden_size
         self.dropout_rate = dropout_rate
         self.vocab = vocab
+        self.att_type = att_type
 
         # default values
         self.encoder = None 
@@ -223,10 +225,26 @@ class NMT(nn.Module):
         ###     3. Compute the attention scores e_t, a Tensor shape (b, src_len). 
 
         # print(dec_hidden.unsqueeze(1).shape, enc_hiddens_proj.transpose(1,2).shape)
-        e_t = torch.bmm(dec_hidden.unsqueeze(1), enc_hiddens_proj.transpose(1,2)).squeeze(1)
-        # print(e_t.shape)
-        ###        Note: b = batch_size, src_len = maximum source length, h = hidden size.
+        if self.att_type == 'scaled_dot_product':
+            e_t = torch.bmm(dec_hidden.unsqueeze(1), enc_hiddens_proj.transpose(1,2)).squeeze(1)
+            e_t = e_t / np.sqrt(self.hidden_size)
 
+        elif self.att_type == 'additive':
+            W_1 = nn.Linear(self.hidden_size, self.hidden_size, bias=False) 
+            W_2 = nn.Linear(self.hidden_size, self.hidden_size, bias=False)
+            V = nn.Linear(self.hidden_size, 1, bias=False)
+            e_t = V(F.relu(W_1(dec_hidden)).unsqueeze(1) + F.relu(W_2(enc_hiddens_proj))).squeeze(2)
+
+        elif self.att_type == 'multiplicative':
+            W = nn.Linear(self.hidden_size, self.hidden_size, bias=False)
+            h_tt = F.relu((W(enc_hiddens_proj)))
+            e_t = torch.bmm(dec_hidden.unsqueeze(1), h_tt.transpose(1,2)).squeeze(1)
+
+        elif self.att_type == 'key_value':
+            pass
+
+        # print('e_t Size: ',  e_t.shape)
+        ###        Note: b = batch_size, src_len = maximum source length, h = hidden size.
 
         # Set e_t to -inf where enc_masks has 1
         if enc_masks is not None:

@@ -39,6 +39,7 @@ Options:
     --valid-niter=<int>                     perform validation after how many iterations [default: 2000]
     --dropout=<float>                       dropout [default: 0.3]
     --max-decoding-time-step=<int>          maximum number of decoding time steps [default: 70]
+    --att_type=<str>                        type of attention used additive/multiplicative/key_value [default: scaled_dot_product]
 """
 import math
 import sys
@@ -126,7 +127,8 @@ def train(args: Dict):
     model = NMT(embed_size=int(args['--embed-size']),
                 hidden_size=int(args['--hidden-size']),
                 dropout_rate=float(args['--dropout']),
-                vocab=vocab)
+                vocab=vocab,
+                att_type=args['--att_type'])
     model.train()
 
     uniform_init = float(args['--uniform-init'])
