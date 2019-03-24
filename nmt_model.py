@@ -130,8 +130,6 @@ class NMT(nn.Module):
         """
         enc_hiddens, dec_init_state = None, None
         # print('src_len, b, e: ', source_padded.shape[0], source_padded.shape[1], self.model_embeddings.embed_size)
-        ### YOUR CODE HERE (~ 8 Lines)
-        ### TODO:
         ###     1. Construct Tensor `X` of source sentences with shape (src_len, b, e) using the source model embeddings.
         ###         src_len = maximum source sentence length, b = batch size, e = embedding size. Note
         ###         that there is no initial hidden state or cell for the decoder.
@@ -243,8 +241,9 @@ class NMT(nn.Module):
             e_t = torch.bmm(dec_hidden.unsqueeze(1), h_tt.transpose(1,2)).squeeze(1)
 
         elif self.att_type == 'key_value':
-            pass
-
+            key, value = torch.split(enc_hiddens, enc_hiddens.shape[-1] // 2, dim=2)
+            e_t = torch.bmm(dec_hidden.unsqueeze(1), key.transpose(1,2)).squeeze(1)
+            
         # print('e_t Size: ',  e_t.shape)
         ###        Note: b = batch_size, src_len = maximum source length, h = hidden size.
 
@@ -256,8 +255,7 @@ class NMT(nn.Module):
         alpha_t = F.softmax(e_t, dim=1)
         ###     2. Use batched matrix multiplication between alpha_t and enc_hiddens to obtain the
         ###         attention output vector, a_t.
-
-        # print(alpha_t.unsqueeze(1).shape, enc_hiddens.shape)
+        # print(alpha_t.unsqueeze(1).shape, value.shape)
         a_t = torch.bmm(alpha_t.unsqueeze(1), enc_hiddens).squeeze(1)
         # print(a_t.shape)
         ###     3. Concatenate dec_hidden with a_t to compute tensor U_t
