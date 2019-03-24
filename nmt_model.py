@@ -70,6 +70,11 @@ class NMT(nn.Module):
         self.dropout = nn.Dropout(p=dropout_rate)
         ###     self.dropout (Dropout Layer)
 
+        self.W_1 = nn.Linear(self.hidden_size, self.hidden_size, bias=False)
+        self.W_2 = nn.Linear(self.hidden_size, self.hidden_size, bias=False)
+        self.V = nn.Linear(self.hidden_size, 1, bias=False)
+        self.W = nn.Linear(self.hidden_size, self.hidden_size, bias=False)
+
 
     def forward(self, source: List[List[str]], target: List[List[str]]) -> torch.Tensor:
         """ Take a mini-batch of source and target sentences, compute the log-likelihood of
@@ -230,14 +235,10 @@ class NMT(nn.Module):
             e_t = e_t / np.sqrt(self.hidden_size)
 
         elif self.att_type == 'additive':
-            W_1 = nn.Linear(self.hidden_size, self.hidden_size, bias=False).to(self.device) 
-            W_2 = nn.Linear(self.hidden_size, self.hidden_size, bias=False).to(self.device)
-            V = nn.Linear(self.hidden_size, 1, bias=False).to(self.device)
-            e_t = V(F.relu(W_1(dec_hidden)).unsqueeze(1) + F.relu(W_2(enc_hiddens_proj))).squeeze(2)
+            e_t = self.V(F.relu(self.W_1(dec_hidden)).unsqueeze(1) + F.relu(self.W_2(enc_hiddens_proj))).squeeze(2)
 
         elif self.att_type == 'multiplicative':
-            W = nn.Linear(self.hidden_size, self.hidden_size, bias=False).to(self.device)
-            h_tt = F.relu((W(enc_hiddens_proj)))
+            h_tt = F.relu((self.W(enc_hiddens_proj)))
             e_t = torch.bmm(dec_hidden.unsqueeze(1), h_tt.transpose(1,2)).squeeze(1)
 
         elif self.att_type == 'key_value':

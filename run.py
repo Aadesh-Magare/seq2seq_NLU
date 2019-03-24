@@ -21,15 +21,15 @@ Options:
     --dev-tgt=<file>                        dev target file
     --vocab=<file>                          vocab file
     --seed=<int>                            seed [default: 0]
-    --batch-size=<int>                      batch size [default: 16]
-    --embed-size=<int>                      embedding size [default: 200]
-    --hidden-size=<int>                     hidden size [default: 200]
+    --batch-size=<int>                      batch size [default: 32]
+    --embed-size=<int>                      embedding size [default: 300]
+    --hidden-size=<int>                     hidden size [default: 300]
     --clip-grad=<float>                     gradient clipping [default: 5.0]
     --log-every=<int>                       log every [default: 100]
     --max-epoch=<int>                       max epoch [default: 5]
     --input-feed                            use input feeding
     --patience=<int>                        wait for how many iterations to decay learning rate [default: 5]
-    --max-num-trial=<int>                   terminate training after how many trials [default: 1]
+    --max-num-trial=<int>                   terminate training after how many trials [default: 3]
     --lr-decay=<float>                      learning rate decay [default: 0.5]
     --beam-size=<int>                       beam size [default: 5]
     --sample-size=<int>                     sample size [default: 5]
@@ -39,7 +39,7 @@ Options:
     --valid-niter=<int>                     perform validation after how many iterations [default: 2000]
     --dropout=<float>                       dropout [default: 0.3]
     --max-decoding-time-step=<int>          maximum number of decoding time steps [default: 70]
-    --att_type=<str>                        type of attention used additive/multiplicative/key_value [default: multiplicative]
+    --att_type=<str>                        type of attention used additive/multiplicative/key_value/scaled_dot_product [default: multiplicative]
 """
 import math
 import sys
