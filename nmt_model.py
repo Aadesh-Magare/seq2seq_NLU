@@ -235,8 +235,9 @@ class NMT(nn.Module):
             e_t = e_t / np.sqrt(self.hidden_size)
 
         elif self.att_type == 'additive':
-            e_t = self.V(F.relu(self.W_1(dec_hidden)).unsqueeze(1) + F.relu(self.W_2(enc_hiddens_proj))).squeeze(2)
-
+            # e_t = self.V(F.relu(self.W_1(dec_hidden)).unsqueeze(1) + F.relu(self.W_2(enc_hiddens_proj))).squeeze(2)
+            e_t = self.V(F.relu(self.W_1(dec_hidden).unsqueeze(1) + self.W_2(enc_hiddens_proj))).squeeze(2)
+            
         elif self.att_type == 'multiplicative':
             h_tt = F.relu((self.W(enc_hiddens_proj)))
             e_t = torch.bmm(dec_hidden.unsqueeze(1), h_tt.transpose(1,2)).squeeze(1)
