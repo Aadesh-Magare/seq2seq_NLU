@@ -39,7 +39,7 @@ Options:
     --valid-niter=<int>                     perform validation after how many iterations [default: 2000]
     --dropout=<float>                       dropout [default: 0.3]
     --max-decoding-time-step=<int>          maximum number of decoding time steps [default: 70]
-    --att_type=<str>                        type of attention used additive/multiplicative/key_value/scaled_dot_product [default: multiplicative]
+    --att_type=<str>                        type of attention used additive/multiplicative/key_value/scaled_dot_product [default: additive]
 """
 import math
 import sys
