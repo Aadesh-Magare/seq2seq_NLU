@@ -39,7 +39,8 @@ Options:
     --valid-niter=<int>                     perform validation after how many iterations [default: 2000]
     --dropout=<float>                       dropout [default: 0.3]
     --max-decoding-time-step=<int>          maximum number of decoding time steps [default: 70]
-    --att_type=<str>                        type of attention used additive/multiplicative/key_value/scaled_dot_product [default: key_value]
+    --att_type=<str>                        type of attention used additive/multiplicative/key_value/scaled_dot_product [default: scaled_dot_product]
+    --self_attention=<str>                  whether to use self_attention in encoder-decoder [default: False]
 """
 import math
 import sys
@@ -130,7 +131,8 @@ def train(args: Dict):
                 hidden_size=int(args['--hidden-size']),
                 dropout_rate=float(args['--dropout']),
                 vocab=vocab,
-                att_type=args['--att_type'])
+                att_type=args['--att_type'],
+                self_attention=args['--self_attention'])
     model.train()
 
     uniform_init = float(args['--uniform-init'])

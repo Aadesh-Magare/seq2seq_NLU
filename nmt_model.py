@@ -27,7 +27,7 @@ class NMT(nn.Module):
         - Unidirection LSTM Decoder
         - Global Attention Model (Luong, et al. 2015)
     """
-    def __init__(self, embed_size, hidden_size, vocab, dropout_rate=0.2, att_type='scaled_dot_product'):
+    def __init__(self, embed_size, hidden_size, vocab, dropout_rate=0.2, att_type='scaled_dot_product', self_attention=False):
         """ Init NMT Model.
 
         @param embed_size (int): Embedding size (dimensionality)
@@ -42,6 +42,7 @@ class NMT(nn.Module):
         self.dropout_rate = dropout_rate
         self.vocab = vocab
         self.att_type = att_type
+        self.self_attention = self_attention
 
         # default values
         self.encoder = None 
@@ -141,6 +142,15 @@ class NMT(nn.Module):
         ###         - After you apply the encoder, you need to apply the `pad_packed_sequence` function to enc_hiddens.
         enc_hiddens, s_lenghts = pad_packed_sequence(enc_hiddens)
         enc_hiddens = enc_hiddens.transpose(0,1)
+        if self.self_attention :
+            # print(enc_hiddens.shape)
+            e_t = torch.bmm(enc_hiddens, enc_hiddens.transpose(1,2))
+            # print(e_t.shape)
+            alpha_t = F.softmax(e_t, dim=1)
+            # print(alpha_t.shape)
+            a_t = torch.bmm(alpha_t, enc_hiddens)
+            enc_hiddens = a_t
+
         ###         - Note that the shape of the tensor returned by the encoder is (src_len, b, h*2) and we want to
         ###           return a tensor of shape (b, src_len, h*2) as `enc_hiddens`.
         init_decoder_hidden = self.h_projection(torch.cat((last_hidden[0], last_hidden[1]), 1))
@@ -188,6 +198,17 @@ class NMT(nn.Module):
             combined_outputs.append(o_t)
             o_prev = o_t
         combined_outputs = torch.stack(combined_outputs, dim=0)
+
+        # if self.self_attention :
+        #     print(combined_outputs.shape)
+        #     # s b h . b s h / b h s
+        #     e_t = torch.bmm(combined_outputs, combined_outputs.transpose(1,2))
+        #     print(e_t.shape)
+        #     alpha_t = F.softmax(e_t, dim=1)
+        #     print(alpha_t.shape)
+        #     a_t = torch.bmm(alpha_t, combined_outputs)
+        #     combined_outputs = a_t
+
         return combined_outputs
 
 
