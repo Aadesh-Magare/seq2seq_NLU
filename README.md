@@ -21,6 +21,7 @@
     run.py decode [options] MODEL_PATH TEST_SOURCE_FILE TEST_TARGET_FILE OUTPUT_FILE
 
 **Options:**
+
     -h --help                               show this screen.
     --cuda                                  use GPU
     --train-src=<file>                      train source file
@@ -51,3 +52,5 @@
     --self_attention=<str>                  whether to use self_attention in encoder-decoder [default: False]
 
     
+**References:**
+The starter kit for project is taken from Stanford CS224n.
