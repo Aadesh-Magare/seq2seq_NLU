@@ -1,6 +1,8 @@
 nltk
+numpy
+scipy
 docopt
 tqdm==4.29.1
 pytorch
-numpy
 matplotlib
+torchvision

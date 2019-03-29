@@ -53,4 +53,5 @@
 
     
 **References:**
-The starter kit for project is taken from Stanford CS224n.
+
+The starter kit for project is taken from Stanford CS224n (http://web.stanford.edu/class/cs224n/)

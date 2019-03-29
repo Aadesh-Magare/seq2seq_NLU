@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
+E1-246 2019: Assignment 2
+Aadesh Magare <aadeshmagare@iisc.ac.in>
+
 CS224N 2018-19: Homework 4
 vocab.py: Vocabulary Generation
 Pencheng Yin <pcyin@cs.cmu.edu>
