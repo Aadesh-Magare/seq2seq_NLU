@@ -37,6 +37,8 @@ Developement and Test datasets were taken from WMT14. Corpus Bleu score is used 
 \section{Model}
 The starter kit for project is taken from Stanford CS224n. \cite{cs224n} The Seq2Seq model has bidirectional LSTM encoder and a unidirectional LSTM decoder. The final model is trained with parameters in Table ~\ref{table1}.
 
+In the interest of training time En-Hi model is trained for 5 epocs while En-De model is trained for 1 epoc, thus the Bleu score is less than what is expected but it should suffice for our comparison task.
+
 \begin{table}[h]
 \centering
 \begin{tabular}{|l|l|}
@@ -64,7 +66,7 @@ Training loss during the process initially drops rapidly to the level of 40 - 35
 \label{fig1}
 \end{figure}
 
-The loss further keeps dropping at a slow rate as seen in Figure ~\ref{fig2}. Similarly behaviour is seen for Perplexity, it rapidly drops to the level of 500-450 as seen in Figure ~\ref{fig3}. And further keeps dropping at slow rate as seen in Figure ~\ref{fig4}.
+The loss further keeps dropping at a slow rate. Similar behaviour is seen for Perplexity, it rapidly drops to the level of 500-450 as seen in Figure ~\ref{fig3} and further keeps dropping at slow rate.
 
 % \begin{figure}[!htbp]
 % \includegraphics[width=\linewidth]{hi_mul_loss_2.png}
@@ -95,7 +97,7 @@ Training loss during the process initially drops rapidly to the level of 40 - 30
 \label{fig5}
 \end{figure}
 
-The loss further keeps dropping at a slow rate as seen in Figure ~\ref{fig6}. Similarly behaviour is seen for Perplexity, it rapidly drops to the level of 450-400 as seen in Figure ~\ref{fig7} and further keeps dropping at slow rate as seen in Figure ~\ref{fig8}.
+The loss further keeps dropping at a slow rate. Similar behaviour is seen for Perplexity, it rapidly drops to the level of 450-400 as seen in Figure ~\ref{fig7} and further keeps dropping at slow rate.
 
 
 % \begin{figure}[!htbp]
@@ -122,13 +124,14 @@ The loss further keeps dropping at a slow rate as seen in Figure ~\ref{fig6}. Si
 
 The model with additive attention trained for 5 epocs achieves a Bleu score of 0.8248.
 Training loss during the process initially drops rapidly to the level of 55 - 50 as seen in Figure ~\ref{fig9}. 
+
 \begin{figure}[!htbp]
 \includegraphics[width=\linewidth]{hi_add_loss_1.png}
 \caption{Initial Training Loss (Additive)}
 \label{fig9}
 \end{figure}
 
-The loss further keeps dropping at a slow rate as seen in Figure ~\ref{fig10}. Similarly behaviour is seen for Perplexity, it rapidly drops to the level of 250-200 as seen in Figure ~\ref{fig11} and further keeps dropping at slow rate as seen in Figure ~\ref{fig12}.
+The loss further keeps dropping at a slow rate. Similar behaviour is seen for Perplexity, it rapidly drops to the level of 250-200 as seen in Figure ~\ref{fig11} and further keeps dropping at slow rate.
 
 % \begin{figure}[!htbp]
 % \includegraphics[width=\linewidth]{hi_add_loss_2.png}
@@ -162,7 +165,7 @@ Training loss during the process initially drops rapidly to the level of 50 - 40
 \end{figure}
 
 
-The loss further keeps dropping at a slow rate as seen in Figure ~\ref{fig14}. Similarly behaviour is seen for Perplexity, it rapidly drops to the level of 400-300 as seen in Figure ~\ref{fig15} and further keeps dropping at slow rate as seen in Figure ~\ref{fig16}.
+The loss further keeps dropping at a slow rate. Similar behaviour is seen for Perplexity, it rapidly drops to the level of 400-300 as seen in Figure ~\ref{fig15} and further keeps dropping at slow rate.
 
 % \begin{figure}[!htbp]
 % \includegraphics[width=\linewidth]{hi_mul_loss_1.png}
@@ -198,7 +201,7 @@ Training loss during the process initially drops rapidly to the level of 50 - 45
 \label{fig17}
 \end{figure}
 
-The loss further keeps dropping at a slow rate as seen in Figure ~\ref{fig18}. Similarly behaviour is seen for Perplexity, it rapidly drops to the level of 230-200 as seen in Figure ~\ref{fig19}. And further keeps dropping at slow rate as seen in Figure ~\ref{fig20}.
+The loss further keeps dropping at a slow rate. Similar behaviour is seen for Perplexity, it rapidly drops to the level of 230-200 as seen in Figure ~\ref{fig19} and further keeps dropping at slow rate.
 
 % \begin{figure}[!htbp]
 % \includegraphics[width=\linewidth]{de_mul_loss_2.png}
@@ -228,7 +231,7 @@ Training loss during the process initially drops rapidly to the level of 40 - 35
 \label{fig21}
 \end{figure}
 
-The loss further keeps dropping at a slow rate as seen in Figure ~\ref{fig22} Similarly behaviour is seen for Perplexity, it rapidly drops to the level of 220-200 as seen in Figure ~\ref{fig23} and further keeps dropping at slow rate as seen in Figure ~\ref{fig24}.
+The loss further keeps dropping at a slow rate. Similar behaviour is seen for Perplexity, it rapidly drops to the level of 220-200 as seen in Figure ~\ref{fig23} and further keeps dropping at slow rate.
 
 
 % \begin{figure}[!htbp]
@@ -256,13 +259,14 @@ The loss further keeps dropping at a slow rate as seen in Figure ~\ref{fig22} Si
 
 The model with additive attention trained for 1 epoc achieves a Bleu score of 0.2283.
 Training loss during the process initially drops rapidly to the level of 45 - 40 as seen in Figure ~\ref{fig25}. 
+
 \begin{figure}[!htbp]
 \includegraphics[width=\linewidth]{de_add_loss_1.png}
 \caption{Initial Training Loss (Additive)}
 \label{fig25}
 \end{figure}
 
-The loss further keeps dropping at a slow rate as seen in Figure ~\ref{fig26}. Similarly behaviour is seen for Perplexity, it rapidly drops to the level of 220-200 as seen in Figure ~\ref{fig27} and further keeps dropping at slow rate as seen in Figure ~\ref{fig28}.
+The loss further keeps dropping at a slow rate. Similar behaviour is seen for Perplexity, it rapidly drops to the level of 220-200 as seen in Figure ~\ref{fig27} and further keeps dropping at slow rate.
 
 % \begin{figure}[!htbp]
 % \includegraphics[width=\linewidth]{de_mul_loss_2.png}
@@ -297,7 +301,7 @@ Training loss during the process initially drops rapidly to the level of 40 - 35
 
 
 
-The loss further keeps dropping at a slow rate as seen in Figure ~\ref{fig30}. Similarly behaviour is seen for Perplexity, it rapidly drops to the level of 220-200 as seen in Figure ~\ref{fig31} and further keeps dropping at slow rate as seen in Figure ~\ref{fig32}.
+The loss further keeps dropping at a slow rate. Similar behaviour is seen for Perplexity, it rapidly drops to the level of 220-200 as seen in Figure ~\ref{fig31} and further keeps dropping at slow rate.
 
 % \begin{figure}[!htbp]
 % \includegraphics[width=\linewidth]{de_key-value_loss_2.png}
@@ -321,7 +325,7 @@ The loss further keeps dropping at a slow rate as seen in Figure ~\ref{fig30}. S
 % ///////////////////////////////////////////////////////////////////
 
 \section{Self-Attention:}
-Self-attention was implemented for encoder and decoder for the best performing model from previous sections. The training loss and perplexity follows similar expected behaviour as earlier where it initially drops rapidly and then slow down towards end of training. Self-attention however improves the Bleu score of model and shows a 1.2537 point improvement for En-Hi translation task and 1.3 point improvement for En-De task.
+Self-attention was implemented for encoder and decoder for the best performing model from previous sections. The training loss and perplexity follows similar expected behaviour as earlier where it initially drops rapidly and then slow down towards end of training. Self-attention however improves the Bleu score of model and shows a 1.2537 point improvement for En-Hi translation task and 0.13 point improvement for En-De task.
 
 \section*{Repository:}
 The project is available at \cite{GitHub} which contains code for experiment and additional plots.

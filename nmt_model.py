@@ -146,7 +146,7 @@ class NMT(nn.Module):
             # print(enc_hiddens.shape)
             e_t = torch.bmm(enc_hiddens, enc_hiddens.transpose(1,2))
             # print(e_t.shape)
-            alpha_t = F.softmax(e_t, dim=1)
+            alpha_t = F.softmax(e_t, dim=2)
             # print(alpha_t.shape)
             a_t = torch.bmm(alpha_t, enc_hiddens)
             enc_hiddens = a_t

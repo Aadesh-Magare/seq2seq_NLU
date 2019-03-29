@@ -1,4 +1,4 @@
-# Machine Translation
+# Seq2Seq Model with Attention for Machine Translation.
 
 # E1-246 2019: Assignment 2
 
