@@ -30,14 +30,14 @@ A Seq2Seq model with attention was implemented for the translation task.
 several attention mechanisms like scaled dot product, multiplicative, additive and key value attention were tried. The report contains details about the experiments and their comparison. further self attention for encoder and decoder was also explored and compared against.
 
 \section{Datasets}
-The English-German dataset was taken from WMT14 \cite{WMT}, which included Europarl v7, Common Crawl, News Commentary sources. It had over 4.5 M lines of text, out of which 1.5M were dropped for being exceedingly long length ( $>$20 words).
+The English-German dataset was taken from WMT14 \cite{WMT}, which included Europarl v7, Common Crawl, News Commentary sources. It had over 4.5 M lines of text, out of which 0.15M were dropped for being exceedingly long length ( $>$20 words).
 English-Hindi dataset was taken from \cite{ufal} which had total 0.25 M lines of text out of which around 9k were dropped ( $>$ 30 words). 
-Developement and Test datasets were taken from WMT14. Corpus Bleu score is used as evaluation metric.
+Developement and Test datasets were taken from WMT14. Corpus BLEU score is used as evaluation metric.
 
 \section{Model}
-The starter kit for project is taken from Stanford CS224n. \cite{cs224n} The Seq2Seq model has bidirectional LSTM encoder and a unidirectional LSTM decoder. The final model is trained with parameters in Table ~\ref{table1}.
+The starter kit for project is taken from Stanford CS224n. \cite{224n} The Seq2Seq model has bidirectional LSTM encoder and a unidirectional LSTM decoder. The final model is trained with parameters in Table ~\ref{table1}.
 
-In the interest of training time En-Hi model is trained for 5 epocs while En-De model is trained for 1 epoc, thus the Bleu score is less than what is expected but it should suffice for our comparison task.
+In the interest of training time En-Hi model is trained for 5 epocs while En-De model is trained for 1 epoc, thus the BLEU score is less than what is expected but it should suffice for our comparison task.
 
 \begin{table}[h]
 \centering
@@ -57,7 +57,7 @@ Embedding Dimensions & 300                         \\ \hline
 % ///////////////////////////////////////////////////////////////////
 
 \subsection{Multiplicative Attention}
-The model with multiplicative attention trained for 5 epocs achieves a Bleu score of 0.6138.
+The model with multiplicative attention trained for 5 epocs achieves a BLEU score of 0.6138.
 Training loss during the process initially drops rapidly to the level of 40 - 35 as seen in Figure ~\ref{fig1}. 
 
 \begin{figure}[!htbp]
@@ -88,7 +88,7 @@ The loss further keeps dropping at a slow rate. Similar behaviour is seen for Pe
 % //////////////////////////////////////////////////////////////////
 
 \subsection{Scaled Dot Product Attention}
-The model with scaled dot product attention trained for 5 epocs achieves a Bleu score of 2.1176.
+The model with scaled dot product attention trained for 5 epocs achieves a BLEU score of 2.1176.
 Training loss during the process initially drops rapidly to the level of 40 - 30 as seen in Figure ~\ref{fig5}.
 
 \begin{figure}[!htbp]
@@ -122,7 +122,7 @@ The loss further keeps dropping at a slow rate. Similar behaviour is seen for Pe
 
 \subsection{Additive Attention}
 
-The model with additive attention trained for 5 epocs achieves a Bleu score of 0.8248.
+The model with additive attention trained for 5 epocs achieves a BLEU score of 0.8248.
 Training loss during the process initially drops rapidly to the level of 55 - 50 as seen in Figure ~\ref{fig9}. 
 
 \begin{figure}[!htbp]
@@ -155,7 +155,7 @@ The loss further keeps dropping at a slow rate. Similar behaviour is seen for Pe
 
 \subsection{Key Value Attention}
 
-The model with key value attention trained for 5 epocs achieves a Bleu score of 0.6174.
+The model with key value attention trained for 5 epocs achieves a BLEU score of 0.6174.
 Training loss during the process initially drops rapidly to the level of 50 - 40 as seen in Figure ~\ref{fig13}. 
 
 \begin{figure}[!htbp]
@@ -185,6 +185,9 @@ The loss further keeps dropping at a slow rate. Similar behaviour is seen for Pe
 % \label{fig16}
 % \end{figure}
 
+Performance of attention schemes for the task can be ordered as: \\
+Scaled Dot Product $>$ Additive $>$ Key Value $>$ Multiplicative  
+
 % /////////////////////////////////////////////////////////////////////
 % /////////////////////////////////////////////////////////////////////
 
@@ -192,7 +195,7 @@ The loss further keeps dropping at a slow rate. Similar behaviour is seen for Pe
 % ///////////////////////////////////////////////////////////////////
 
 \subsection{Multiplicative Attention}
-The model with multiplicative attention trained for 1 epoc achieves a Bleu score of 0.1428.
+The model with multiplicative attention trained for 1 epoc achieves a BLEU score of 0.1428.
 Training loss during the process initially drops rapidly to the level of 50 - 45 as seen in Figure ~\ref{fig17}. 
 
 \begin{figure}[!htbp]
@@ -223,7 +226,7 @@ The loss further keeps dropping at a slow rate. Similar behaviour is seen for Pe
 % //////////////////////////////////////////////////////////////////
 
 \subsection{Scaled Dot Product Attention}
-The model with scaled dot product attention trained for 1 epoc achieves a Bleu score of 5.529.
+The model with scaled dot product attention trained for 1 epoc achieves a BLEU score of 5.529.
 Training loss during the process initially drops rapidly to the level of 40 - 35 as seen in Figure ~\ref{fig21}.
 \begin{figure}[!htbp]
 \includegraphics[width=\linewidth]{de_dot_loss_1.png}
@@ -257,7 +260,7 @@ The loss further keeps dropping at a slow rate. Similar behaviour is seen for Pe
 
 \subsection{Additive Attention}
 
-The model with additive attention trained for 1 epoc achieves a Bleu score of 0.2283.
+The model with additive attention trained for 1 epoc achieves a BLEU score of 0.2283.
 Training loss during the process initially drops rapidly to the level of 45 - 40 as seen in Figure ~\ref{fig25}. 
 
 \begin{figure}[!htbp]
@@ -290,7 +293,7 @@ The loss further keeps dropping at a slow rate. Similar behaviour is seen for Pe
 \pagebreak
 \subsection{Key Value Attention}
 
-The model with key value attention trained for 1 epoc achieves a Bleu score of 0.1294.
+The model with key value attention trained for 1 epoc achieves a BLEU score of 0.1294.
 Training loss during the process initially drops rapidly to the level of 40 - 35 as seen in Figure ~\ref{fig29}. 
 
 \begin{figure}[!htbp]
@@ -321,14 +324,16 @@ The loss further keeps dropping at a slow rate. Similar behaviour is seen for Pe
 % \label{fig32}
 % \end{figure}
 
+Performance of attention schemes for the task can be ordered as: \\
+Scaled Dot Product $>$ Additive $>$  Multiplicative $>$ Key Value 
 % //////////////////////////////////////////////////////////////////
 % ///////////////////////////////////////////////////////////////////
 
 \section{Self-Attention:}
-Self-attention was implemented for encoder and decoder for the best performing model from previous sections. The training loss and perplexity follows similar expected behaviour as earlier where it initially drops rapidly and then slow down towards end of training. Self-attention however improves the Bleu score of model and shows a 1.2537 point improvement for En-Hi translation task and 0.13 point improvement for En-De task.
+Self-attention was implemented for encoder and decoder for the best performing model from previous sections. The training loss and perplexity follows similar expected behaviour as earlier where it initially drops rapidly and then slow down towards end of training. Self-attention however improves the BLEU score of model and shows a 1.2537 point improvement for En-Hi translation task and 0.13 point improvement for En-De task.
 
 \section*{Repository:}
-The project is available at \cite{GitHub} which contains code for experiment and additional plots.
+The project is available at \cite{GitHub} which contains the code for experiments and additional plots obtained during the process.
 
 \bibliography{acl2019}
 \bibliographystyle{acl_natbib}
