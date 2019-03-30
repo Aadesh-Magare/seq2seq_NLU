@@ -14,6 +14,10 @@
 
     use train-local / test-local for non-gpu machine.
 
+**Trained Model:**
+
+    Trained model and vocabulary can be downloaded from: https://drive.google.com/drive/folders/1jakOWurTnITgIvBFm8S_-Cqd2ktwI1ZP?usp=sharing
+
 **Fine-Tuned Usage:**
 
     run.py train --train-src=<file> --train-tgt=<file> --dev-src=<file> --dev-tgt=<file> --vocab=<file> [options]
